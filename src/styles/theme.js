@@ -84,6 +84,8 @@ const space = {
 
 const fonts = {
   main: '',
+  circle: 'Circle',
+  poppins: 'Poppins',
 };
 
 const shadows = {
@@ -131,5 +133,6 @@ export const theme = extendTheme({
     Switch: switchTheme,
     Button: {},
   },
+
   shadows,
 });

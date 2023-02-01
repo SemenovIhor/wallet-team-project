@@ -13,7 +13,7 @@ export function DiagramTab() {
   const dataAr = useSelector(getStatistics);
 
   const display = isMobile ? 'block' : 'flex';
-  console.log(dataAr);
+
   return (
     <Box as="section" pt="28px" display={display} gap="32px">
       <Box mb="32px">

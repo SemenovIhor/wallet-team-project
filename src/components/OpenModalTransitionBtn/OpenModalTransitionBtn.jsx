@@ -8,10 +8,14 @@ const OpenModalTransitionBtn = () => {
   return (
     <Box>
       <Button
-        borderLeftRadius="0"
+        borderRadius="50"
+        backgroundColor="#24CCA7"
+        _hover="#24CCA7"
+        boxSize="44px"
+        boxShadow=" 0px 6px 15px rgba(36, 204, 167, 0.5)"
         onClick={() => dispatch(isModalAddTransaction(true))}
       >
-        <AddIcon />
+        <AddIcon boxSize="20px" color="#FFFFFF" />
       </Button>
     </Box>
   );

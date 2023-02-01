@@ -3,7 +3,7 @@
 @import '../stylesheet/fonts.css';
 
 * {
-  font-family: Circe, sans-serif;
+  font-family: 'Circe', sans-serif;
 }
 
 body {
@@ -18,4 +18,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html,
+body,
+#root {
+  min-height: 100% !important;
 }

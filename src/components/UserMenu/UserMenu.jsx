@@ -2,13 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from 'components/Media/useMedia';
 import { Box, Text, Button, IconButton } from '@chakra-ui/react';
 import { SlLogout } from 'react-icons/sl';
-import authOperations from 'redux/auth/authOperations';
 import authSelectors from 'redux/auth/authSelectors';
+import { isModalLogout } from 'redux/modal/modalSlice';
 
 const UserMenu = () => {
   const { isNotMobile } = useMedia();
   const dispatch = useDispatch();
-  const { logOut } = authOperations;
   const user = useSelector(authSelectors.getUser);
   const userName = user?.username;
 
@@ -26,7 +25,7 @@ const UserMenu = () => {
             colorScheme="white"
             aria-label="Logout button"
             size="18px"
-            onClick={() => dispatch(logOut())}
+            onClick={() => dispatch(isModalLogout(true))}
             leftIcon={
               <SlLogout
                 color="#BDBDBD"
@@ -57,7 +56,7 @@ const UserMenu = () => {
             colorScheme="white"
             aria-label="Logout button"
             size="18px"
-            onClick={() => dispatch(logOut())}
+            onClick={() => dispatch(isModalLogout(true))}
             icon={
               <SlLogout
                 color="#BDBDBD"

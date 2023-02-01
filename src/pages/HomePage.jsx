@@ -1,17 +1,17 @@
 import ModalAddTransaction from 'components/ModalAddTransaction/ModalAddTransaction';
 import OpenModalTransitionBtn from 'components/OpenModalTransitionBtn/OpenModalTransitionBtn';
 import { Transactions } from 'components/TransactionsTable/Transactions';
-
 import { useMedia } from 'components/Media/useMedia';
 import { useModals } from 'hooks/useModal';
 import Balance from 'components/Balance/Balance';
-import { useEffect } from 'react';
+import ModalLogout from 'components/ModalLogout/ModalLogout';
 import { useDispatch } from 'react-redux';
-import { useTransactions } from 'hooks/useTransactions';
+import { useEffect } from 'react';
 import {
   fetchCategories,
   fetchTransactions,
 } from 'redux/transaction/transactionOperations';
+import { useTransactions } from 'hooks/useTransactions';
 
 const HomePage = () => {
   // запрос на получение всех транзакций
@@ -52,15 +52,15 @@ const HomePage = () => {
   }
 
   const { isMobile } = useMedia();
-  const { isModalAdd } = useModals();
+  const { isModalAdd, isModalLogout } = useModals();
   return (
     <>
       {isModalAdd && <ModalAddTransaction />}
+      {isModalLogout && <ModalLogout />}
       {isMobile && <Balance />}
       {newTransactions && <Transactions dataArr={newTransactions} />}
       <OpenModalTransitionBtn />
     </>
   );
 };
-
 export default HomePage;

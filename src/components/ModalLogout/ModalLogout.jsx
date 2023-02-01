@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { Button } from '@chakra-ui/react';
-import { modalIsOpen } from '../../redux/modal/modalSlice';
+import { isModalLogout } from '../../redux/modal/modalSlice';
+import authOperations from 'redux/auth/authOperations';
 
 import styled from '@emotion/styled';
 
 const ModalLogout = () => {
   const dispatch = useDispatch();
+  const { logOut } = authOperations;
 
   useEffect(() => {
     const onClickEscape = e => {
       if (e.code === 'Escape') {
-        dispatch(modalIsOpen(false));
+        dispatch(isModalLogout(false));
       }
     };
     document.addEventListener('keydown', onClickEscape);
@@ -23,15 +25,27 @@ const ModalLogout = () => {
 
   const handleBackdrop = event => {
     if (event.target === event.currentTarget) {
-      dispatch(modalIsOpen(false));
+      dispatch(isModalLogout(false));
     }
+  };
+
+  const modalCloseLogOut = () => {
+    dispatch(logOut());
+    dispatch(isModalLogout(false));
   };
 
   return ReactDOM.createPortal(
     <Overlay onClick={handleBackdrop}>
       <ModalWindow>
-        <Button borderRightRadius="0">Yes</Button>
-        <Button borderRightRadius="0">No</Button>
+        <Button borderRightRadius="0" onClick={() => modalCloseLogOut()}>
+          Yes
+        </Button>
+        <Button
+          borderRightRadius="0"
+          onClick={() => dispatch(isModalLogout(false))}
+        >
+          No
+        </Button>
       </ModalWindow>
     </Overlay>,
 

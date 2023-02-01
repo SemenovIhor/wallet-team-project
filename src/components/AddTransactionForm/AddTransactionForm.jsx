@@ -8,11 +8,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
-import {
-  addTransaction,
-  fetchCategories,
-} from 'redux/transaction/transactionOperations';
-import { useEffect } from 'react';
+import { addTransaction } from 'redux/transaction/transactionOperations';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import transactionSelectors from 'redux/transaction/transactionSelectors';
@@ -36,10 +32,6 @@ export const AddTransactionForm = () => {
   const toast = useToast();
   const categories = useSelector(getCategories);
   const error = useSelector(getError);
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
 
   const clickOnsubmit = (values, actions) => {
     const newTransaction = {

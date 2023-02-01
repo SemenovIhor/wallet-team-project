@@ -3,7 +3,8 @@ import desktop from 'images/desktop_bg.jpg';
 import tablet from 'images/tablet_bg.jpg';
 
 export const Main = styled.main`
-  height: 100vh;
+  min-height: 100vh;
+
   background-color: #e5e5e5;
   background-image: linear-gradient(
     rgba(255, 255, 255, 0.4) 50%,

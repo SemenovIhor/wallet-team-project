@@ -52,6 +52,8 @@ const Chart = ({ dataArr }) => {
         top="50%"
         left="50%"
         transform="translate(-50%, -50%)"
+        fontSize="18px"
+        fontWeight="700"
       >
         &#8372; {balance}
       </Text>
