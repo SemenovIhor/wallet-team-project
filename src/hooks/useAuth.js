@@ -17,8 +17,8 @@ export const useAuth = () => {
   const user = useSelector(authSelectors.getUser);
   const loading = useSelector(authSelectors.getLoading);
   const error = useSelector(authSelectors.getError);
-  const balance = useSelector(authSelectors.getBalance);
-
+  const balanceOld = useSelector(authSelectors.getBalance);
+  const balance = balanceOld ? balanceOld.toFixed(2) : balanceOld;
   return {
     isAuth,
     isRefreshing,

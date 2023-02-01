@@ -64,7 +64,6 @@ const authSlice = createSlice({
         state.token = null;
         state.isAuth = false;
       })
-
       .addCase(authOperations.fetchCurrentUser.pending, state => {
         state.isRefreshingUser = true;
       })

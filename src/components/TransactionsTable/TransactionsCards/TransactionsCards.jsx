@@ -6,7 +6,7 @@ export const TransactionsCards = function ({ dataArr }) {
     <ul
       key={nanoid()}
       className={`${css.transactionList} ${
-        item.type === 'INCOME' ? css.income : css.expense
+        item.type === '+' ? css.income : css.expense
       }`}
     >
       <li className={css.transactionItem}>

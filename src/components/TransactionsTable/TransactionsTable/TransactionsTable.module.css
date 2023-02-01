@@ -60,3 +60,6 @@
   composes: transactionsValuesSum;
   color: #ff6596;
 }
+.box {
+  padding: 16px 20px;
+}
