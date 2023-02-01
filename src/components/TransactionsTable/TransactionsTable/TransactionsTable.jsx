@@ -3,17 +3,12 @@ import css from './TransactionsTable.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteTransaction } from 'redux/transaction/transactionOperations';
 import { MinusIcon } from '@chakra-ui/icons';
+import { numberNormalize } from '../../../helpers/numberNormalize';
 
 export const TransactionsTable = function ({ dataArr }) {
   // удаление транзакции
   const dispatch = useDispatch();
-  const normalize = num => {
-    return num
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-      .replace('-', '');
-  };
+
   return (
     <section className={css.transactionSection}>
       <table className={css.transactionTable}>
@@ -39,9 +34,11 @@ export const TransactionsTable = function ({ dataArr }) {
               <td className={css.transactionsValues}>{item.category}</td>
               <td className={css.transactionsValues}>{item.comment}</td>
               <td className={item.type === '+' ? css.income : css.expense}>
-                {item.amount}
+                {numberNormalize(item.amount)}
               </td>
-              <td className={css.transactionsValues}>{item.balanceAfter}</td>
+              <td className={css.transactionsValues}>
+                {numberNormalize(item.balanceAfter)}
+              </td>
               <div className={css.blockButton}>
                 <Button
                   borderRadius="50"
