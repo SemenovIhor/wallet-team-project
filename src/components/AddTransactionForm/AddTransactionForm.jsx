@@ -30,7 +30,9 @@ let schema = yup.object().shape({
 export const AddTransactionForm = () => {
   const dispatch = useDispatch();
   const toast = useToast();
-  const categories = useSelector(getCategories);
+  const categories = useSelector(getCategories).filter(
+    item => item.type !== 'INCOME'
+  );
   const error = useSelector(getError);
 
   const clickOnsubmit = (values, actions) => {

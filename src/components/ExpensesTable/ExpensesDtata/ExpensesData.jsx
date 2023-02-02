@@ -8,10 +8,12 @@ import { ImStop2 } from 'react-icons/im';
 const ExpensesData = () => {
   const statistics = useSelector(transactionSelectors.getStatistics);
   const { categoriesSummary } = statistics;
-  // console.log(categoriesSummary);
+  const filteredCategories = categoriesSummary.filter(
+    item => item.type !== 'INCOME'
+  );
 
-  if (categoriesSummary.length) {
-    return categoriesSummary.map(category => {
+  if (filteredCategories.length) {
+    return filteredCategories.map(category => {
       const { name, total } = category;
 
       const color = switchBgStatistic({ name, theme });
