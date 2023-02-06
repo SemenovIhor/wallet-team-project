@@ -1,16 +1,6 @@
 import { useSelector } from 'react-redux';
 import authSelectors from 'redux/auth/authSelectors';
 
-// export const useAuth = () => {
-//   const isAuth = useSelector(authSelectors.getIsAuth);
-//   const IsRefreshingUser = useSelector(authSelectors.getIsRefreshingUser);
-//   const user = useSelector(authSelectors.getUser);
-
-//   return { isAuth, IsRefreshingUser, user };
-// };
-
-// import authSelectors from '../redux/auth/authSelectors';
-
 export const useAuth = () => {
   const isAuth = useSelector(authSelectors.getIsAuth);
   const isRefreshing = useSelector(authSelectors.getIsRefreshingUser);
@@ -19,7 +9,7 @@ export const useAuth = () => {
   const error = useSelector(authSelectors.getError);
   const balance1 = useSelector(authSelectors.getBalance);
   let balance;
-  if (balance1) {
+  if (balance1 || balance1 === 0) {
     const temp = balance1.toFixed(2);
     const numberAfter = temp.slice(temp.length - 2, temp.length);
     let numberBefore = temp.slice(0, temp.length - 3);

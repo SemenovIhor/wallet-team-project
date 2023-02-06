@@ -7,12 +7,14 @@ export const useTransactions = () => {
   const statistics = useSelector(transactionSelectors.getStatistics);
   const loadingTransactions = useSelector(transactionSelectors.getLoading);
   const errorTransactions = useSelector(transactionSelectors.getError);
+  const oneTransaction = useSelector(transactionSelectors.getOneTransaction);
   return {
     transactions,
     categories,
     statistics,
     loadingTransactions,
     errorTransactions,
+    oneTransaction,
   };
 };
 

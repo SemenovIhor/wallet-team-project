@@ -5,10 +5,14 @@ export const modalSlice = createSlice({
   initialState: {
     modalAddTransaction: false,
     modalLogout: false,
+    modalUpdateTransaction: false,
   },
   reducers: {
     isModalAddTransaction(state, { payload }) {
       state.modalAddTransaction = payload;
+    },
+    isModalUpdateTransaction(state, { payload }) {
+      state.modalUpdateTransaction = payload;
     },
     isModalLogout(state, { payload }) {
       state.modalLogout = payload;
@@ -16,5 +20,9 @@ export const modalSlice = createSlice({
   },
 });
 
-export const { isModalAddTransaction, isModalLogout } = modalSlice.actions;
+export const {
+  isModalAddTransaction,
+  isModalLogout,
+  isModalUpdateTransaction,
+} = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;

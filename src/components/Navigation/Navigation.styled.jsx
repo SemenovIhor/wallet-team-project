@@ -11,6 +11,7 @@ export const NavLinkStyled = styled(NavLink)`
     color: ${p => p.theme.colors.household};
     font-weight: 700;
     font-family: Poppins, sans-serif;
+    filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
   }
 `;
 

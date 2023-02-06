@@ -19,6 +19,7 @@ export async function updateTransaction({
   categoryId,
   comment,
   amount,
+  balanceAfter,
 }) {
   const { data } = await axios.patch(`/transactions/${id}`, {
     transactionDate,
@@ -27,6 +28,9 @@ export async function updateTransaction({
     comment,
     amount,
   });
+
+  data.amount = amount;
+  data.balanceAfter = balanceAfter;
   return data;
 }
 

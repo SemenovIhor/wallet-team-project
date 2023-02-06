@@ -12,6 +12,7 @@ import {
   fetchTransactions,
 } from 'redux/transaction/transactionOperations';
 import { useTransactions } from 'hooks/useTransactions';
+import ModalUpdateTransaction from 'components/ModalUpdateTransaction/ModalUpdateTransaction';
 
 const HomePage = () => {
   // запрос на получение всех транзакций
@@ -24,7 +25,7 @@ const HomePage = () => {
 
   // получение массива транзакций со стейта
   const { transactions, categories } = useTransactions();
-  console.log(transactions);
+
   // Добавление наименования транзакции в новый массив транзакций
   let newTransactions;
   const toChangeTransaction = (transactions, categories) => {
@@ -50,13 +51,13 @@ const HomePage = () => {
   if (transactions.length && categories.length) {
     toChangeTransaction(transactions, categories);
   }
-
   const { isMobile } = useMedia();
-  const { isModalAdd, isModalLogout } = useModals();
+  const { isModalAdd, isModalLogout, isModalUpdate } = useModals();
   return (
     <>
       {isModalAdd && <ModalAddTransaction />}
       {isModalLogout && <ModalLogout />}
+      {isModalUpdate && <ModalUpdateTransaction />}
       {isMobile && <Balance />}
       {newTransactions && <Transactions dataArr={newTransactions} />}
       <OpenModalTransitionBtn />

@@ -12,7 +12,6 @@ export const fetchTransactions = createAsyncThunk(
     }
   }
 );
-//
 export const addTransaction = createAsyncThunk(
   'transaction/addTransaction',
   async (transaction, { rejectWithValue }) => {
@@ -27,10 +26,10 @@ export const addTransaction = createAsyncThunk(
 
 export const deleteTransaction = createAsyncThunk(
   'transaction/deleteTransaction',
-  async (transactionId, { rejectWithValue }) => {
+  async (transaction, { rejectWithValue }) => {
     try {
-      await transactionAPI.deleteTransaction(transactionId);
-      return transactionId;
+      await transactionAPI.deleteTransaction(transaction.id);
+      return transaction;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -42,6 +41,7 @@ export const updateTransaction = createAsyncThunk(
   async (transaction, { rejectWithValue }) => {
     try {
       const data = await transactionAPI.updateTransaction(transaction);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

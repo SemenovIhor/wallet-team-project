@@ -3,7 +3,7 @@ import authOperations from './authOperations';
 import transactionOperations from './../transaction/transactionOperations';
 
 const initialState = {
-  user: { id: '', username: '', email: '', balance: null },
+  user: { id: '', username: '', email: '', balance: 0 },
   token: null,
   isAuth: false,
   error: null,
@@ -59,12 +59,17 @@ const authSlice = createSlice({
           state.user.balance = payload.balanceAfter;
         }
       )
+      .addCase(
+        transactionOperations.deleteTransaction.fulfilled,
+        (state, { payload }) => {
+          state.user.balance = state.user.balance - payload.amount;
+        }
+      )
       .addCase(authOperations.logOut.fulfilled, state => {
-        state.user = { id: '', username: '', email: '', balance: null };
+        state.user = { id: '', username: '', email: '', balance: 0 };
         state.token = null;
         state.isAuth = false;
       })
-
       .addCase(authOperations.fetchCurrentUser.pending, state => {
         state.isRefreshingUser = true;
       })

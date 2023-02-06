@@ -9,7 +9,6 @@ export async function postRegister(credentials) {
 export async function postLogin(credentials) {
   const { data } = await axios.post('/auth/sign-in', credentials);
 
-  console.log(data);
   return data;
 }
 

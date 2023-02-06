@@ -42,6 +42,12 @@ const transactionSlice = createSlice({
     statistics: null,
     isLoading: false,
     error: null,
+    transaction: null,
+  },
+  reducers: {
+    EditTransaction(state, { payload }) {
+      state.transaction = payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -59,7 +65,7 @@ const transactionSlice = createSlice({
       })
       .addCase(deleteTransaction.fulfilled, (state, { payload }) => {
         state.allTransactions = state.allTransactions.filter(
-          transaction => transaction.id !== payload
+          transaction => transaction.id !== payload.id
         );
       })
       .addCase(fetchCategories.fulfilled, (state, { payload }) => {
@@ -74,4 +80,5 @@ const transactionSlice = createSlice({
   },
 });
 
+export const { EditTransaction } = transactionSlice.actions;
 export const transactionReducer = transactionSlice.reducer;
