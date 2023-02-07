@@ -7,7 +7,6 @@ const { useField } = require('formik');
 
 export function MyCheckbox({ children, ...props }) {
   const [field, meta] = useField({ ...props, type: 'checkbox' });
-  console.log(meta);
   return (
     <div>
       <Stack direction={['row']} spacing="5px" align="center" justify="center">
