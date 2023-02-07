@@ -3,7 +3,6 @@ import {
   FormControl,
   FormErrorMessage,
   Input,
-  Select,
   Stack,
   useToast,
 } from '@chakra-ui/react';
@@ -15,8 +14,9 @@ import transactionSelectors from 'redux/transaction/transactionSelectors';
 import { MyCheckbox } from 'components/Switch/Switch';
 import time from 'service/date';
 import { isModalAddTransaction } from 'redux/modal/modalSlice';
-const { getCategories, getError } = transactionSelectors;
+import { AsyncSelect } from 'components/Select/Select';
 
+const { getCategories, getError } = transactionSelectors;
 const { date } = time;
 
 let schema = yup.object().shape({
@@ -34,6 +34,13 @@ export const AddTransactionForm = () => {
     item => item.type !== 'INCOME'
   );
   const error = useSelector(getError);
+
+  const groupedCategories = categories.map(category => {
+    return {
+      value: category.id,
+      label: category.name,
+    };
+  });
 
   const clickOnsubmit = (values, actions) => {
     const newTransaction = {
@@ -80,29 +87,16 @@ export const AddTransactionForm = () => {
         <Form height="100%">
           <Stack spacing={5}>
             <MyCheckbox name="type" checked={props.values.type} />
+
             {props.values.type && (
               <Field name="categoryId">
                 {({ field, form }) => (
-                  <FormControl
-                    isInvalid={
-                      form.errors.categoryId && form.touched.categoryId
-                    }
-                  >
-                    <Select
-                      {...field}
-                      placeholder="Select a category"
-                      variant="flushed"
-                    >
-                      {categories.map(category => (
-                        <option key={category.id} value={category.id}>
-                          {category.name}
-                        </option>
-                      ))}
-                    </Select>
-                    <FormErrorMessage>
-                      {form.errors.categoryId}
-                    </FormErrorMessage>
-                  </FormControl>
+                  <AsyncSelect
+                    field={field}
+                    props={props}
+                    form={form}
+                    groupedOptions={groupedCategories}
+                  />
                 )}
               </Field>
             )}
