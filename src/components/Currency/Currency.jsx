@@ -11,13 +11,15 @@ import {
 const Currency = () => {
   const [currency, setCurrency] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const LSKey = 'Currency_KEY';
+  const timeOneHour = 3600000;
 
   useEffect(() => {
     async function fetchCurrency() {
       try {
         setIsLoading(true);
         const data = await getCurrency();
-        const dataCurrency = await data.filter(el => {
+        const dataCurrency = data.filter(el => {
           if (el['currencyCodeA'] === 978 && el['currencyCodeB'] === 980) {
             return el;
           }
@@ -28,14 +30,43 @@ const Currency = () => {
         });
 
         setCurrency(dataCurrency);
+        setCurrencyToLS(dataCurrency);
       } catch (error) {
+        setCurrency(getCurrencyFromLS().arr);
         console.log(error.message);
       } finally {
         setIsLoading(false);
       }
     }
-    fetchCurrency();
+
+    const dataLS = getCurrencyFromLS();
+
+    if (dataLS) {
+      const timeDifference = new Date().getTime() - dataLS.time;
+
+      if (timeDifference < timeOneHour) {
+        setCurrency(dataLS.arr);
+      } else {
+        fetchCurrency();
+      }
+    } else {
+      fetchCurrency();
+    }
   }, []);
+
+  function getCurrencyFromLS() {
+    return JSON.parse(localStorage.getItem(LSKey));
+  }
+
+  function setCurrencyToLS(arg) {
+    const obj = {
+      arr: arg,
+      time: new Date().getTime(),
+      time2: new Date(),
+    };
+
+    localStorage.setItem(LSKey, JSON.stringify(obj));
+  }
 
   return (
     <>
