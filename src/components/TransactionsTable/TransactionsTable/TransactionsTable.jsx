@@ -31,7 +31,7 @@ export const TransactionsTable = function ({ dataArr }) {
 
         <tbody className={css.transactionTableBody}>
           {dataArr.map(item => (
-            <tr className={css.transactionBodyLine}>
+            <tr key={item.id} className={css.transactionBodyLine}>
               <td className={css.transactionsValues}>{item.transactionDate}</td>
               <td className={css.transactionsValues}>{item.type}</td>
               {/* <td className={css.transactionsValues}>{item.categoryId}</td> */}
@@ -43,30 +43,36 @@ export const TransactionsTable = function ({ dataArr }) {
               <td className={css.transactionsValues}>
                 {numberNormalize(item.balanceAfter)}
               </td>
-              <div className={css.blockButton}>
-                <Button
-                  borderRadius="50"
-                  backgroundColor="#24CCA7"
-                  _hover="#24CCA7"
-                  boxSize="44px"
-                  boxShadow=" 0px 6px 15px rgba(36, 204, 167, 0.5)"
-                  onClick={() => dispatch(deleteTransaction(item))}
-                >
-                  <DeleteIcon boxSize="20px" color="#FFFFFF" />
-                </Button>
-              </div>
-              <div className={css.blockButton}>
-                <Button
-                  borderRadius="50"
-                  backgroundColor="#24CCA7"
-                  _hover="#24CCA7"
-                  boxSize="44px"
-                  boxShadow=" 0px 6px 15px rgba(36, 204, 167, 0.5)"
-                  onClick={() => onClickUpdate(item)}
-                >
-                  <EditIcon boxSize="20px" color="#FFFFFF" />
-                </Button>
-              </div>
+              <td>
+                <div className={css.blockButton}>
+                  <Button
+                    borderRadius="50"
+                    backgroundColor="#24CCA7"
+                    _hover={{
+                      background: '#13f0bf',
+                    }}
+                    boxSize="44px"
+                    boxShadow=" 0px 6px 15px rgba(36, 204, 167, 0.5)"
+                    onClick={() => dispatch(deleteTransaction(item))}
+                  >
+                    <DeleteIcon boxSize="20px" color="#FFFFFF" />
+                  </Button>
+                </div>
+                <div className={css.blockButton}>
+                  <Button
+                    borderRadius="50"
+                    backgroundColor="#24CCA7"
+                    _hover={{
+                      background: '#13f0bf',
+                    }}
+                    boxSize="44px"
+                    boxShadow=" 0px 6px 15px rgba(36, 204, 167, 0.5)"
+                    onClick={() => onClickUpdate(item)}
+                  >
+                    <EditIcon boxSize="20px" color="#FFFFFF" />
+                  </Button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

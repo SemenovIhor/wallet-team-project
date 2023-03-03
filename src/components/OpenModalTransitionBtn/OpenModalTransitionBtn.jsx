@@ -18,7 +18,9 @@ const OpenModalTransitionBtn = () => {
         bottom={padding}
         borderRadius="50"
         backgroundColor="#24CCA7"
-        _hover="#24CCA7"
+        _hover={{
+          background: '#13f0bf',
+        }}
         boxSize="44px"
         boxShadow=" 0px 6px 15px rgba(36, 204, 167, 0.5)"
         onClick={() => dispatch(isModalAddTransaction(true))}
